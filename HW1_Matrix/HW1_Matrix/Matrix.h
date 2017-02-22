@@ -7,10 +7,11 @@ class Matrix
 {
 private:
     int n;
+    int size;
     int** elem;
     
 public:
-    Matrix(int _n);
+    Matrix(int _n); // matrix size = 2^n
     Matrix(const Matrix& _matrix);
     Matrix(const std::string URL);
     ~Matrix();
@@ -20,6 +21,9 @@ private:
     
 public:
     Matrix& operator= (const Matrix& _matrix);
+    Matrix operator+ (const Matrix& _matrix);
+    Matrix operator- (const Matrix& _matrix);
+    Matrix operator* (const Matrix& _matrix);
 };
 
 #endif

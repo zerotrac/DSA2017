@@ -1,11 +1,3 @@
-//
-//  Matrix.cpp
-//  HW1_Matrix
-//
-//  Created by 陈书新 on 2017/2/21.
-//  Copyright © 2017年 陈书新. All rights reserved.
-//
-
 #include "Matrix.h"
 #include <cassert>
 #include <iostream>
@@ -21,9 +13,9 @@ Matrix::Matrix(const Matrix& _matrix)
 {
     n = _matrix.n;
     initializeElem();
-    for (int i = 0; i < n; ++i)
+    for (int i = 0; i < size; ++i)
     {
-        for (int j = 0; j < n; ++j)
+        for (int j = 0; j < size; ++j)
         {
             elem[i][j] = _matrix.elem[i][j];
         }
@@ -35,9 +27,9 @@ Matrix::Matrix(const std::string URL)
     std::ifstream in(URL);
     in >> n;
     initializeElem();
-    for (int i = 0; i < n; ++i)
+    for (int i = 0; i < size; ++i)
     {
-        for (int j = 0; j < n; ++j)
+        for (int j = 0; j < size; ++j)
         {
             in >> elem[i][j];
         }
@@ -47,7 +39,7 @@ Matrix::Matrix(const std::string URL)
 
 Matrix::~Matrix()
 {
-    for (int i = 0; i < n; ++i)
+    for (int i = 0; i < size; ++i)
     {
         delete[] elem[i];
     }
@@ -56,26 +48,75 @@ Matrix::~Matrix()
 
 void Matrix::initializeElem()
 {
-    elem = new int*[n];
-    for (int i = 0; i < n; ++i)
+    size = 1 << n;
+    elem = new int*[size];
+    for (int i = 0; i < size; ++i)
     {
-        elem[i] = new int[n];
-        for (int j = 0; j < n; ++j)
+        elem[i] = new int[size];
+        for (int j = 0; j < size; ++j)
         {
             elem[i][j] = 0;
         }
     }
 }
 
-Matrix& Matrix::operator=(const Matrix &_matrix)
+Matrix& Matrix::operator= (const Matrix& _matrix)
 {
     assert(n == _matrix.n);
-    for (int i = 0; i < n; ++i)
+    for (int i = 0; i < size; ++i)
     {
-        for (int j = 0; j < n; ++j)
+        for (int j = 0; j < size; ++j)
         {
             elem[i][j] = _matrix.elem[i][j];
         }
     }
     return *this;
+}
+
+Matrix Matrix::operator+ (const Matrix& _matrix)
+{
+    assert(n == _matrix.n);
+    Matrix result(n);
+    result.initializeElem();
+    for (int i = 0; i < result.size; ++i)
+    {
+        for (int j = 0; j < result.size; ++j)
+        {
+            result.elem[i][j] = elem[i][j] + _matrix.elem[i][j];
+        }
+    }
+    return result;
+}
+
+Matrix Matrix::operator- (const Matrix& _matrix)
+{
+    assert(n == _matrix.n);
+    Matrix result(n);
+    result.initializeElem();
+    for (int i = 0; i < result.size; ++i)
+    {
+        for (int j = 0; j < result.size; ++j)
+        {
+            result.elem[i][j] = elem[i][j] - _matrix.elem[i][j];
+        }
+    }
+    return result;
+}
+
+Matrix Matrix::operator* (const Matrix& _matrix)
+{
+    assert(n == _matrix.n);
+    Matrix result(n);
+    result.initializeElem();
+    for (int i = 0; i < result.size; ++i)
+    {
+        for (int j = 0; j < result.size; ++j)
+        {
+            for (int k = 0; k < result.size; ++k)
+            {
+                result.elem[i][j] += elem[i][k] * _matrix.elem[k][j];
+            }
+        }
+    }
+    return result;
 }
