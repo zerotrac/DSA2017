@@ -22,7 +22,7 @@ Matrix::Matrix(const Matrix& _matrix)
     }
 }
 
-Matrix::Matrix(const std::string URL)
+Matrix::Matrix(const std::string& URL)
 {
     std::ifstream in(URL);
     in >> n;
@@ -44,6 +44,32 @@ Matrix::~Matrix()
         delete[] elem[i];
     }
     delete[] elem;
+}
+
+int Matrix::sz() const
+{
+    return size;
+}
+
+void Matrix::setElem(int x, int y, int z)
+{
+    if (x < 0 || x >= size || y < 0 || y >= size) return;
+    elem[x][y] = z;
+}
+
+void Matrix::print(const std::string &URL) const
+{
+    std::ofstream out(URL);
+    out << n << std::endl;
+    for (int i = 0; i < size; ++i)
+    {
+        for (int j = 0; j < size; ++j)
+        {
+            out << elem[i][j];
+            if (j == size - 1) out << std::endl; else out << " ";
+        }
+    }
+    out.close();
 }
 
 void Matrix::initializeElem()
@@ -77,7 +103,6 @@ Matrix Matrix::operator+ (const Matrix& _matrix)
 {
     assert(n == _matrix.n);
     Matrix result(n);
-    result.initializeElem();
     for (int i = 0; i < result.size; ++i)
     {
         for (int j = 0; j < result.size; ++j)
@@ -92,7 +117,6 @@ Matrix Matrix::operator- (const Matrix& _matrix)
 {
     assert(n == _matrix.n);
     Matrix result(n);
-    result.initializeElem();
     for (int i = 0; i < result.size; ++i)
     {
         for (int j = 0; j < result.size; ++j)
@@ -107,7 +131,6 @@ Matrix Matrix::operator* (const Matrix& _matrix)
 {
     assert(n == _matrix.n);
     Matrix result(n);
-    result.initializeElem();
     for (int i = 0; i < result.size; ++i)
     {
         for (int j = 0; j < result.size; ++j)

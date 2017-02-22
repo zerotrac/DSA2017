@@ -13,8 +13,13 @@ private:
 public:
     Matrix(int _n); // matrix size = 2^n
     Matrix(const Matrix& _matrix);
-    Matrix(const std::string URL);
+    Matrix(const std::string& URL);
     ~Matrix();
+    
+public:
+    int sz() const;
+    void setElem(int x, int y, int z);
+    void print(const std::string& URL) const;
     
 private:
     void initializeElem();
