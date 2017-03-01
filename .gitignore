@@ -1,2 +1,5 @@
 .DS_Store
 *.xcodeproj
+*.pro.user
+*Release/
+bin/
