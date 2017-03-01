@@ -18,7 +18,7 @@ int main(int argc, const char** argv)
     //Array* array1 = new Array(array0);
     clock_t s = clock();
     array0->radixSort();
-    //array1->quickSort();
+    //array1->systemSort();
     //std::cout << "check = " << array0->equals(array1) << std::endl;
     //array1->insertionSort();
     clock_t t = clock();

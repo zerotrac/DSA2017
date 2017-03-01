@@ -11,6 +11,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <algorithm>
 
 #define uint unsigned int
 
@@ -34,6 +35,7 @@ public:
     void quickSort();
     void mergeSort();
     void radixSort();
+    void systemSort();
     
 public:
     bool equals(Array* that) const;

@@ -21,7 +21,6 @@ Array::Array(int _size)
     std::random_device rd;
     std::mt19937 gen(rd());
     //std::uniform_int_distribution<uint> dis(0LL, 100000LL);
-    
     std::uniform_int_distribution<uint> dis(0LL, (1LL << 32) - 1);
     
     size = _size;
@@ -109,7 +108,7 @@ void Array::qsort(int l, int r)
     uint* dest = elem + r;
     for (; cur < dest; ++cur)
     {
-        if (*cur < pivot)
+        if (*cur < pivot || (*cur == pivot && ((dest - cur) & 1)))
         {
             tmp = *(++w);
             *w = *cur;
@@ -191,6 +190,11 @@ void Array::radixSort()
             --cur;
         }
     }
+}
+
+void Array::systemSort()
+{
+    std::sort(elem, elem + size);
 }
 
 bool Array::equals(Array *that) const
