@@ -100,7 +100,6 @@ void Array::shellSort()
     }
 }
 
-
 void Array::qsort(int l, int r)
 {
     if (l >= r) return;
