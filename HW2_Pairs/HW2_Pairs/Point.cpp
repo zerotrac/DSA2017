@@ -48,6 +48,11 @@ std::ostream& operator<< (std::ostream& out, const Point& point)
     return out;
 }
 
+bool Point::operator== (const Point& that) const
+{
+    return x == that.x && y == that.y;
+}
+
 bool Point::cmpX(const Point &a, const Point &b)
 {
     return a.x < b.x || (a.x == b.x && a.y < b.y);

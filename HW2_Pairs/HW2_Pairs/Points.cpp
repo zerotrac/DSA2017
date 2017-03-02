@@ -49,7 +49,7 @@ Point Points::get(int index) const
     return elem[index];
 }
 
-Point Points::closestPairBruteForce() const
+Point Points::closestPairBruteForce()
 {
     int ansx = 0;
     int ansy = 1;
@@ -70,7 +70,7 @@ Point Points::closestPairBruteForce() const
     return Point(ansx, ansy);
 }
 
-Point Points::closestPairOptimized() const
+Point Points::closestPairOptimized()
 {
     std::sort(elem, elem + size, Point::cmpX);
     
@@ -101,7 +101,64 @@ Point Points::closestPairOptimized() const
     return Point(ansx, ansy);
 }
 
-Point Points::closestPairRecurision() const
+Point Points::closestPairRecurision()
 {
-    return Point();
+    Point ansPoint1;
+    Point ansPoint2;
+    long long mindis = 1LL << 60;
+    std::sort(elem, elem + size, Point::cmpX);
+    
+    Point* tmp = new Point[size];
+    for (int block = 1; block < size; block <<= 1)
+    {
+        for (int start = 0; start + block < size; start += block << 1)
+        {
+            Point* sa = elem + start;
+            Point* ea = sa + block - 1;
+            Point* sb = ea + 1;
+            Point* eb = sb + block - 1;
+            if (eb > elem + size - 1) eb = elem + size - 1;
+            int len = (int)(eb - sa + 1);
+            
+            Point* cur = tmp + start;
+            while (sa <= ea && sb <= eb) (*cur++) = (*sa).getY() <= (*sb).getY() ? *(sa++) : *(sb++);
+            while (sa <= ea) (*cur++) = *(sa++);
+            while (sb <= eb) (*cur++) = *(sb++);
+            memcpy(elem + start, tmp + start, sizeof(Point) * len);
+            
+            int fin = start + block + block - 1;
+            if (fin > size - 1) fin = size - 1;
+            
+            for (int i = start; i < fin; ++i)
+            {
+                for (int j = i + 1; j <= i + 6; ++j)
+                {
+                    if (j <= fin)
+                    {
+                        long long curdis = elem[i].distanceTo(elem[j]);
+                        if (curdis < mindis)
+                        {
+                            mindis = curdis;
+                            ansPoint1 = elem[i];
+                            ansPoint2 = elem[j];
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    delete[] tmp;
+    
+    int retx = 0;
+    int rety = 0;
+    for (int i = 0; i < size; ++i)
+    {
+        if (ansPoint1 == elem[i]) retx = i;
+        if (ansPoint2 == elem[i]) rety = i;
+    }
+    return Point(retx, rety);
 }

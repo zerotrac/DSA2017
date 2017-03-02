@@ -30,6 +30,7 @@ public:
     int getY() const;
     long long distanceTo(Point that) const; // distance^2
     friend std::ostream& operator<< (std::ostream& out, const Point& point);
+    bool operator== (const Point& that) const;
     
 public:
     static bool cmpX(const Point& a, const Point& b);

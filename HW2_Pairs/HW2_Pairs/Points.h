@@ -27,9 +27,9 @@ public:
     Point get(int index) const;
     
 public:
-    Point closestPairBruteForce() const;
-    Point closestPairOptimized() const;
-    Point closestPairRecurision() const;
+    Point closestPairBruteForce();
+    Point closestPairOptimized();
+    Point closestPairRecurision();
 };
 
 #endif
