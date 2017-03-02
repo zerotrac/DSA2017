@@ -9,7 +9,7 @@
 #include <iomanip>
 #include "Array.h"
 
-const int N = 200000000;
+const int N = 1000000000;
 //const int N = 1000000000;
 
 int main(int argc, const char** argv)
@@ -17,7 +17,7 @@ int main(int argc, const char** argv)
     Array* array0 = new Array(N);
     //Array* array1 = new Array(array0);
     clock_t s = clock();
-    array0->radixSort();
+    array0->shellSort();
     //array1->systemSort();
     //std::cout << "check = " << array0->equals(array1) << std::endl;
     //array1->insertionSort();

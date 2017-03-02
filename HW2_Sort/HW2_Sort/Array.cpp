@@ -73,15 +73,28 @@ void Array::insertionSort()
 void Array::shellSort()
 {
     std::vector<int> v;
-    long long p = 1;
-    for (; p < size; p *= 2)
+    //long long p = 1;
+    /*for (; p < size; p *= 2)
     {
         long long q = 1;
         for (; p * q < size; q *= 3)
         {
             v.push_back((int)(p * q));
         }
+    }*/
+    for (int k = 2;; ++k)
+    {
+        long long p = (1LL << (k + k)) - 3 * (1LL << k) + 1;
+        if (p >= size) break;
+        v.push_back((int)p);
     }
+    for (int k = 0;; ++k)
+    {
+        long long p = 9 * ((1LL << (k + k)) - (1LL << k)) + 1;
+        if (p >= size) break;
+        v.push_back((int)p);
+    }
+    
     std::sort(v.begin(), v.end());
     for (int i = (int)v.size() - 1; i >= 0; --i)
     {
