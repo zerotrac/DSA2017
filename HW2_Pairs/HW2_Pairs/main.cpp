@@ -18,7 +18,7 @@ int main(int argc, const char** argv)
     //Points* points1 = new Points(points0);
     //Points* points2 = new Points(points0);
     clock_t s = clock();
-    Point ans1 = points0->closestPairRecurision();
+    Point ans1 = points0->closestPairSystem();
     //Point ans2 = points1->closestPairOptimized();
     //Point ans3 = points2->closestPairBruteForce();
     clock_t t = clock();

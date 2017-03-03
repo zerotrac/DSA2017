@@ -29,6 +29,7 @@ public:
 public:
     Point closestPairBruteForce();
     Point closestPairOptimized();
+    Point closestPairSystem();
     Point closestPairRecurision();
 };
 

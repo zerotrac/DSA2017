@@ -101,6 +101,56 @@ Point Points::closestPairOptimized()
     return Point(ansx, ansy);
 }
 
+Point Points::closestPairSystem()
+{
+    Point ansPoint1;
+    Point ansPoint2;
+    long long mindis = 1LL << 60;
+    std::sort(elem, elem + size, Point::cmpX);
+    
+    Point* tmp = new Point[size];
+    for (int block = 1; block < size; block <<= 1)
+    {
+        for (int start = 0; start + block < size; start += block << 1)
+        {
+            int fin = start + block + block - 1;
+            if (fin > size - 1) fin = size - 1;
+            std::sort(elem + start, elem + fin + 1, Point::cmpY);
+            
+            for (int i = start; i < fin; ++i)
+            {
+                for (int j = i + 1; j <= i + 6; ++j)
+                {
+                    if (j <= fin)
+                    {
+                        long long curdis = elem[i].distanceTo(elem[j]);
+                        if (curdis < mindis)
+                        {
+                            mindis = curdis;
+                            ansPoint1 = elem[i];
+                            ansPoint2 = elem[j];
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    delete[] tmp;
+    
+    int retx = 0;
+    int rety = 0;
+    for (int i = 0; i < size; ++i)
+    {
+        if (ansPoint1 == elem[i]) retx = i;
+        else if (ansPoint2 == elem[i]) rety = i;
+    }
+    return Point(retx, rety);
+}
+
 Point Points::closestPairRecurision()
 {
     Point ansPoint1;
@@ -158,7 +208,7 @@ Point Points::closestPairRecurision()
     for (int i = 0; i < size; ++i)
     {
         if (ansPoint1 == elem[i]) retx = i;
-        if (ansPoint2 == elem[i]) rety = i;
+        else if (ansPoint2 == elem[i]) rety = i;
     }
     return Point(retx, rety);
 }
