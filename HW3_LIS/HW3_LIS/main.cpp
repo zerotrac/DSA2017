@@ -29,6 +29,7 @@ void work(int n, int dataGen)
         for (int i = 0; i < n; ++i)
         {
             a[i] = dis(gen);
+            //a[i] = i + 1;
             out << a[i];
             if (i != n - 1) out << " "; else out << std::endl;
         }
@@ -50,6 +51,8 @@ void work(int n, int dataGen)
     bin[0] = 0;
     parent[0] = -1;
     int maxPosition = 0;
+    
+    clock_t s = clock();
     
     for (int i = 1; i < n; ++i)
     {
@@ -75,6 +78,10 @@ void work(int n, int dataGen)
         bin[w] = i;
         if (w == 0) parent[i] = -1; else parent[i] = bin[w - 1];
     }
+    
+    clock_t t = clock();
+    double p = (double)(t - s) / CLOCKS_PER_SEC;
+    std::cout << "time = " << p << "s\n";
     
     std::ofstream ans("output.txt");
     ans << curR + 1 << std::endl;
