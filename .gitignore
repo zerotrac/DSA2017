@@ -4,3 +4,4 @@
 *Release/
 bin/
 *.txt
+!readme.txt
