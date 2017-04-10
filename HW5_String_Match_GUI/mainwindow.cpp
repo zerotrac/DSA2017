@@ -140,5 +140,4 @@ void MainWindow::start()
 
     QMessageBox* msgbox = new QMessageBox(QMessageBox::Information, "Info", "匹配完成！共匹配到"+QString::number(result.size())+"次，具体位置已经输出到output.txt文件中。", QMessageBox::Ok, this);
     msgbox->exec();
-
 }
