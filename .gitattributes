@@ -1,0 +1,4 @@
+*.txt filter=lfs diff=lfs merge=lfs -text
+vgg_features.txt filter=lfs diff=lfs merge=lfs -text
+vgg_features2.txt filter=lfs diff=lfs merge=lfs -text
+TP2/vgg_features.txt filter=lfs diff=lfs merge=lfs -text
