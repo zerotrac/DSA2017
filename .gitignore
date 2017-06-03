@@ -5,3 +5,4 @@
 bin/
 *.txt
 !readme.txt
+!vgg_features.txt

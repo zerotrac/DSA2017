@@ -1,3 +1,3 @@
-可执行文件在bin文件夹中。
-通过命令行运行（不然生成的文件的路径会不正确）。
-根据提示进行数据的输入即可。
+version https://git-lfs.github.com/spec/v1
+oid sha256:18827576f1f2c002012f9e7297205b93c98360bc13d2f533aef63a997039a0dd
+size 153
